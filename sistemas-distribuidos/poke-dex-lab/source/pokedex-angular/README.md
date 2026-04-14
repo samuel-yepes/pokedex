@@ -43,8 +43,8 @@
 | Encabezado | Vulnerabilidad que previene |
 |---|---|
 | `Content-Security-Policy` | Ataques XSS (Cross-Site Scripting), inyección de scripts maliciosos |
-| `Strict-Transport-Security` | Ataques de degradación a HTTP, interceptación de tráfico (MITM) |
-| `X-Content-Type-Options: ` | MIME sniffing attacks, ejecución de archivos con tipo incorrecto |
+| `Strict-Transport-Security` | Ataques de degradación a HTTP, interceptación de tráfico (MITM) obligando al navegador a usar siempre HTTPS|
+| `X-Content-Type-Options: ` | MIME sniffing , evitando que archivos de texto o imágenes sean interpretados como scripts ejecutables. |
 | `X-Frame-Options: ` | Clickjacking, carga de la app en iframes de terceros |
 | `Referrer-Policy: n` | Fuga de información sensible en headers de referencia |
 | `Permissions-Policy` | Acceso no autorizado a hardware del dispositivo (cámara, micrófono, geolocalización) |
