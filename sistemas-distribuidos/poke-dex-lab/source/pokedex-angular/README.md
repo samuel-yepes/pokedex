@@ -1,36 +1,61 @@
-# Pokédex Angular
+#  PokeDex — Despliegue en Azure App Service
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![codecov](https://codecov.io/gh/keilermora/pokedex-angular/branch/master/graph/badge.svg?token=9E0D28IOFT)](https://codecov.io/gh/keilermora/pokedex-angular)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+**Estudiante:** Samuel Yepes
+**Curso:** Sistemas Distribuidos
+**Fecha:** 14/02/2026
+**URL pública:** https://app-pokedex-estudiante-cqbvd9g8cmg0e5gy.eastus-01.azurewebsites.net/
 
-[https://keilermora.github.io/pokedex-angular/](https://keilermora.github.io/pokedex-angular/)
+---
 
-La aplicación muestra el listado y el detalle de los Pokémon de las primeras 3 generaciones.
+##  Cuenta en la Nube — Azure for Students
 
-La imagen que representa un Pokémon en el listado muestra las variaciones que estos tuvieron durante las primeras versiones, desde la versión Green (1996) hasta la version Emerald (2005).
+### Paso 1: Activar Azure for Students
 
-Los detalles de un Pokémon individual muestra sus estadísticas base y los registros de la Pokédex de las diferentes versiones.
+1. Ingresar a [https://azure.microsoft.com/es-es/free/students/](https://azure.microsoft.com/es-es/free/students/)
+2. Hacer clic en **"Activar ahora"**
+3. Iniciar sesión con el **correo institucional** (formato `@tecnocomfenalco.edu.co`)
+4. Completar la verificación de identidad estudiantil
+5. Aceptar los términos y condiciones
+6. La cuenta se activa con **$100 USD de crédito gratuito** sin necesidad de tarjeta de crédito
 
-El proyecto fue desarrollado usando la librería de JavaScript [Angular](https://angular.io/) para crear la interfaz de usuario, en comunicación con la Api RESTful [PokéAPI](https://pokeapi.co/).
+### Paso 2: Acceder al Portal de Azure
 
-## Requisitos mínimos
+1. Ir a [https://portal.azure.com](https://portal.azure.com)
+2. Iniciar sesión con las credenciales institucionales
+3. Verificar que la suscripción activa sea **"Azure for Students"**
 
-- [Nodejs](https://nodejs.org) con soporte de largo plazo (LTS).
-- Un navegador web
+### Paso 3: Crear un Grupo de Recursos
 
-## Ambiente de pruebas
+1. En el portal, buscar **"Grupos de recursos"**
+2. Hacer clic en **"+ Crear"**
+3. Configurar:
+   - **Suscripción:** Azure for Students
+   - **Nombre:** `rg-pokedex-estudiante`
+   - **Región:** East US *(nota: East US 2 puede estar bloqueada por política institucional)*
+4. Hacer clic en **"Revisar y crear"** → **"Crear"**
 
-Ejecutar en la raíz del proyecto:
+---
 
-```
-npm start
-```
+##  Reflexión Técnica
 
-## Referencias
+### 1. ¿Qué vulnerabilidades previenen los encabezados implementados?
 
-- [Angular](https://angular.io/): One framework.
-- [Angular Folder Structure](https://angular-folder-structure.readthedocs.io/en/latest/): Create a skeleton structure which is flexible for projects big or small.
-- [Font Awesome](https://fontawesome.com/): The web's most popular icon set and toolkit.
-- [Normalize.css](https://necolas.github.io/normalize.css/): A modern, HTML5-ready alternative to CSS resets.
-- [PokéAPI](https://pokeapi.co/): The RESTful Pokémon API.
+| Encabezado | Vulnerabilidad que previene |
+|---|---|
+| `Content-Security-Policy` | Ataques XSS (Cross-Site Scripting), inyección de scripts maliciosos |
+| `Strict-Transport-Security` | Ataques de degradación a HTTP, interceptación de tráfico (MITM) |
+| `X-Content-Type-Options: ` | MIME sniffing attacks, ejecución de archivos con tipo incorrecto |
+| `X-Frame-Options: ` | Clickjacking, carga de la app en iframes de terceros |
+| `Referrer-Policy: n` | Fuga de información sensible en headers de referencia |
+| `Permissions-Policy` | Acceso no autorizado a hardware del dispositivo (cámara, micrófono, geolocalización) |
+
+### 2. ¿Qué aprendiste sobre la relación entre despliegue y seguridad web?
+
+El despliegue no termina cuando la aplicación es accesible públicamente. La seguridad debe ser parte integral del proceso desde el inicio. Configurar correctamente los headers HTTP es una capa de protección fundamental que no requiere cambios en el código de la aplicación, sino en la configuración del servidor. Un despliegue sin estas cabeceras expone innecesariamente a los usuarios a vectores de ataque comunes y bien documentados.
+
+### 3. ¿Qué desafíos encontraste en el proceso?
+
+- **Restricción de regiones:** La suscripción institucional bloqueaba `eastus2`. Fue necesario identificar las regiones permitidas y recrear el recurso.
+- **Content Security Policy vs Azure:** Azure App Service inyectaba su propio header CSP más restrictivo que sobreescribía el configurado en `web.config`. La solución fue agregar `<remove>` antes de cada `<add>` en los headers.
+- **Base-href incorrecto:** La aplicación Angular estaba compilada con `--base-href=/pokedex-angular/`, lo que causaba que las imágenes de la lista de Pokémon no cargaran. Se requirió identificar la variable `imagesPath` en `environment.prod.ts` y recompilar con `--configuration production --base-href=/`.
+- **Estructura del ZIP:** Al hacer deploy manual via Kudu Zip Push Deploy, comprimir la carpeta en lugar de su contenido resultaba en que los archivos quedaban en un subdirectorio dentro de `wwwroot`.
