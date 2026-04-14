@@ -193,13 +193,6 @@ Connecting to 'https://beta.pokeapi.co/graphql/v1beta' violates Content Security
 **Solución:** Entrar dentro de la carpeta `dist/pokedex-angular/`, seleccionar todo con `Ctrl+A` y comprimir desde adentro.
 
 ---
-
-## 7. Verificación de Seguridad
-
-Se realizó el escaneo en [https://securityheaders.com](https://securityheaders.com) con la URL pública de la aplicación.
-
-**Resultado obtenido:** Calificación **A**
-
 **Headers presentes:**
 - ✅ Content-Security-Policy
 - ✅ X-Content-Type-Options
