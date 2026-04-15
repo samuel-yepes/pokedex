@@ -194,11 +194,11 @@ Connecting to 'https://beta.pokeapi.co/graphql/v1beta' violates Content Security
 
 ---
 **Headers presentes:**
-- ✅ Content-Security-Policy
-- ✅ X-Content-Type-Options
-- ✅ X-Frame-Options
-- ✅ Strict-Transport-Security
-- ✅ Referrer-Policy
-- ✅ Permissions-Policy
+-  Content-Security-Policy
+-  X-Content-Type-Options
+-  X-Frame-Options
+-  Strict-Transport-Security
+-  Referrer-Policy
+-  Permissions-Policy
 
 ---
