@@ -7,6 +7,7 @@
 
 ---
 
+
 ## 1. Preparación del Entorno Local
 
 ### Requisitos previos
