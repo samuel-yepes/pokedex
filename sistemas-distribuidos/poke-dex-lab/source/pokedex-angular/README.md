@@ -13,27 +13,20 @@
 ### Paso 1: Activar Azure for Students
 
 1. Ingresar a [https://azure.microsoft.com/es-es/free/students/](https://azure.microsoft.com/es-es/free/students/)
-2. Hacer clic en **"Activar ahora"**
-3. Iniciar sesión con el **correo institucional** (formato `@tecnocomfenalco.edu.co`)
-4. Completar la verificación de identidad estudiantil
-5. Aceptar los términos y condiciones
-6. La cuenta se activa con **$100 USD de crédito gratuito** sin necesidad de tarjeta de crédito
+2. Hacer clic en **"Iniciar sesion"**
+   <img width="1657" height="918" alt="inicio" src="https://github.com/user-attachments/assets/60e7bb79-4755-400e-88e0-e8dcbce80788" />
+
+4. Iniciar sesión con el **correo institucional** (formato `@tecnocomfenalco.edu.co`)
+5. Completar la verificación de identidad estudiantil
+6. Aceptar los términos y condiciones
+7. La cuenta se activa con **$100 USD de crédito gratuito** sin necesidad de tarjeta de crédito
 
 ### Paso 2: Acceder al Portal de Azure
 
 1. Ir a [https://portal.azure.com](https://portal.azure.com)
 2. Iniciar sesión con las credenciales institucionales
 3. Verificar que la suscripción activa sea **"Azure for Students"**
-
-### Paso 3: Crear un Grupo de Recursos
-
-1. En el portal, buscar **"Grupos de recursos"**
-2. Hacer clic en **"+ Crear"**
-3. Configurar:
-   - **Suscripción:** Azure for Students
-   - **Nombre:** `rg-pokedex-estudiante`
-   - **Región:** East US *(nota: East US 2 puede estar bloqueada por política institucional)*
-4. Hacer clic en **"Revisar y crear"** → **"Crear"**
+   <img width="1907" height="924" alt="image" src="https://github.com/user-attachments/assets/2e486261-bc79-4b35-807f-a816436211c5" />
 
 ---
 
