@@ -1,5 +1,6 @@
 #  PokeDex — Despliegue en Azure App Service
 
+
 **Estudiante:** Samuel Yepes
 **Curso:** Sistemas Distribuidos
 **Fecha:** 14/02/2026
