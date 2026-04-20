@@ -22,6 +22,8 @@ git clone https://github.com/samuel-yepes/pokedex.git
 cd pokedex/sistemas-distribuidos/poke-dex-lab/source/pokedex-angular
 npm install
 ```
+<img width="1851" height="902" alt="image" src="https://github.com/user-attachments/assets/e7da0537-1a45-4be9-a2b4-4befd06ced01" />
+
 
 ---
 
@@ -95,39 +97,75 @@ Se creó/modificó el archivo `web.config` dentro de `dist/pokedex-angular/` con
 
 ---
 
+## 3. Creación del Grupo de Recursos 
+
+Antes de crear el App Service, es fundamental definir un **Grupo de Recursos**. Este actúa como un contenedor lógico que agrupa todos los servicios relacionados con el proyecto, facilitando su administración y limpieza posterior.
+
+### Pasos en el portal de Azure
+
+1. En la barra de búsqueda superior, busca y selecciona **"Grupos de recursos"**.
+2. Haz clic en el botón **"+ Crear"**.
+   <img width="1748" height="848" alt="image" src="https://github.com/user-attachments/assets/aead1825-dbd8-4359-a474-c146f1be4b3c" />
+   <img width="1381" height="888" alt="image" src="https://github.com/user-attachments/assets/1a363606-edcb-44a6-828f-0744a7db6cea" />
+
+4. En la pestaña **Datos básicos**, completa la siguiente información:
+   - **Suscripción:** `Azure for Students`
+   - **Grupo de recursos:** `rg-pokedex-makia`
+   - **Región:** `(US) East US`
+     <img width="933" height="508" alt="image" src="https://github.com/user-attachments/assets/9c1fea29-38e9-492e-869f-13ff7117c1ea" />
+
+5. Haz clic en **"Revisar y crear"** y luego en **"Crear"**.
+
+> **Nota:** Se recomienda utilizar la misma región (`East US`) para todos los recursos de este proyecto para minimizar la latencia y asegurar la compatibilidad entre servicios.
+
+---
+
 ## 4. Creación del Azure App Service
 
 ### Pasos en el portal de Azure
 
 1. Buscar **"App Services"** en el portal
 2. Hacer clic en **"+ Crear"**
-3. Configurar:
-   - **Suscripción:** Azure for Students
-   - **Grupo de recursos:** `rg-pokedex-estudiante`
+   <img width="1911" height="681" alt="image" src="https://github.com/user-attachments/assets/01e7f36c-f781-44fa-a855-b2442153f3fc" />
+
+4. Configurar:
+   - **Suscripción:** `Azure for Students`
+   - **Grupo de recursos:** `rg-pokedex-makia` (Seleccionar el creado en el paso anterior)
    - **Nombre:** `app-pokedex-estudiante`
-   - **Publicar:** Código
-   - **Pila de runtime:** Node 18 LTS
-   - **Región:** East US *(ver error #1 abajo)*
-   - **Plan:** Free F1
-4. Hacer clic en **"Revisar y crear"** → **"Crear"**
+   - **Región:** `East US` 
+   - **Plan:** `Free F1`
+     <img width="826" height="911" alt="image" src="https://github.com/user-attachments/assets/744e55d3-679c-4e2e-a3da-a6c2bb5b833f" />
+     
+
+5. Hacer clic en **"Revisar y crear"** → **"Crear"**
 
 ---
 
 ## 5. Despliegue via Kudu Zip Push Deploy
 
-Al no tener GitHub Actions configurado, se utilizó el panel Kudu de Azure para desplegar manualmente.
+ se utilizó el panel Kudu de Azure para desplegar manualmente.
 
 ### Pasos
 
 1. Seleccionar **todo el contenido** dentro de `dist/pokedex-angular/` con `Ctrl+A`
-2. Comprimir en un archivo ZIP (ej: `deploy.zip`)
+2. Comprimir en un archivo ZIP (ej: `pokedex-angular.zip`)
 3. Navegar a Kudu:
-   ```
-   https://app-pokedex-estudiante-cqbvd9g8cmg0e5gy.scm.azurewebsites.net
-   ```
-4. Ir a **Tools → Zip Push Deploy**
-5. Arrastrar `deploy.zip` al área de carga
-6. Esperar el mensaje: `Deployment successful`
+   ir al app service:
+   <img width="1131" height="538" alt="image" src="https://github.com/user-attachments/assets/4fa10cc1-db7a-4983-b22b-094c2b0de0f4" />
+   herramientas avanzadas:
+   <img width="1049" height="882" alt="image" src="https://github.com/user-attachments/assets/ff733644-c0fd-4dac-ad53-eca57e446465" />
+   luego:
+   <img width="1408" height="829" alt="image" src="https://github.com/user-attachments/assets/c04c50a4-36ee-4349-8473-ebc3f3a82cd1" />
+
+
+
+5. Ir a **Tools → Zip Push Deploy**
+   <img width="896" height="589" alt="image" src="https://github.com/user-attachments/assets/0f38b389-0954-4a42-8fd4-ee1ed385f435" />
+
+6. Arrastrar `pokedex-angular.zip` al área de carga en la ruta: `C:\home\site\wwwroot>`
+   <img width="1125" height="399" alt="image" src="https://github.com/user-attachments/assets/a034c75d-17df-4076-8c2b-02c8b35353b4" />
+
+8. Esperar el mensaje: `Deployment successful`
 
 > **Importante:** Comprimir el **contenido** de la carpeta, no la carpeta en sí. Al abrir el ZIP, `index.html` debe verse directamente, no dentro de una subcarpeta.
 
